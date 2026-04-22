@@ -9,6 +9,8 @@ import Card from "@/components/Card.astro";
 import getSortedPosts from "@/utils/getSortedPosts";
 import IconRss from "@/assets/icons/IconRss.svg";
 import IconArrowRight from "@/assets/icons/IconArrowRight.svg";
+import { Image } from "astro:assets";
+import profileImg from "@/assets/profile.png";
 import { SITE } from "@/config";
 import { SOCIALS } from "@/constants";
 
@@ -22,62 +24,90 @@ const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
 <Layout>
   <Header />
   <main id="main-content" data-layout="index" class="app-layout">
-    <section id="hero" class:list={["pt-8 pb-6", "border-b border-border"]}>
-      <h1 class="my-4 inline-block text-4xl font-bold sm:my-8 sm:text-5xl">
-        Mingalaba
-      </h1>
-      <a
-        target="_blank"
-        href="/rss.xml"
-        class="inline-block"
-        aria-label="rss feed"
-        title="RSS Feed"
-      >
-        <IconRss
-          width={20}
-          height={20}
-          class="scale-125 stroke-accent stroke-3 rtl:-rotate-90"
-        />
-        <span class="sr-only">RSS Feed</span>
-      </a>
+    <!-- ==================== HERO ==================== -->
+    <section id="hero" class="pt-12 pb-16 border-b border-border">
+      <div class="max-w-6xl mx-auto px-6">
+        <div class="grid md:grid-cols-12 gap-12 items-center">
+          
+          <!-- Left: Text -->
+          <div class="md:col-span-7 space-y-8">
+            <div class="inline-flex items-center gap-2 rounded-full bg-zinc-900 px-4 py-1 text-sm text-emerald-400 border border-emerald-900/50">
+              <div class="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></div>
+              Currently optimizing on AMD Instinct MI300X
+            </div>
 
-      <p>
-        AstroPaper is a minimal, responsive, accessible and SEO-friendly Astro
-        blog theme. This theme follows best practices and provides accessibility
-        out of the box. Light and dark mode are supported by default. Moreover,
-        additional color schemes can also be configured.
-      </p>
-      <p class="mt-2">
-        Read the blog posts or check
-        <LinkButton
-          class="underline decoration-dashed underline-offset-4 hover:text-accent"
-          href="https://github.com/satnaing/astro-paper#readme"
-        >
-          README
-        </LinkButton> for more info.
-      </p>
-      {
-        // only display if at least one social link is enabled
-        SOCIALS.length > 0 && (
-          <div class="mt-4 flex max-sm:flex-col sm:items-center">
-            <div class="me-2 mb-1 whitespace-nowrap sm:mb-0">Social Links:</div>
-            <Socials />
+            <h1 class="text-5xl md:text-6xl font-bold tracking-tighter leading-none">
+              AI Systems<br />Performance Engineering
+            </h1>
+
+            <p class="max-w-[520px] text-xl text-zinc-400">
+              Daily deep dives into AMD hardware optimization.<br />
+              Real prototypes • Production benchmarks • Transparent research.
+            </p>
+
+            <div class="flex flex-wrap gap-4 pt-4">
+              <LinkButton 
+                href="#latest" 
+                class="px-8 py-4 text-lg font-semibold bg-white text-black hover:bg-zinc-200 active:scale-[0.985]"
+              >
+                Read latest paper →
+              </LinkButton>
+              
+              <a 
+                href="https://youtube.com/@joeton" 
+                target="_blank"
+                class="inline-flex items-center justify-center rounded-xl border border-white/20 px-8 py-4 text-lg font-semibold transition hover:bg-white/5"
+              >
+                Watch live 7–8pm
+              </a>
+            </div>
+
+            <div class="flex items-center gap-3 pt-6 text-sm text-zinc-500">
+              <div>Daily • Transparent • Hardware-first</div>
+              <div class="w-px h-4 bg-white/20"></div>
+              <div>Real AMD benchmarks • No AI slop</div>
+            </div>
           </div>
-        )
-      }
+
+          <!-- Right: Profile Photo -->
+          <div class="md:col-span-5 flex justify-center md:justify-end">
+            <div class="relative">
+              <!-- Subtle tech glow -->
+              <div class="absolute -inset-8 bg-gradient-to-br from-emerald-500/10 via-cyan-500/10 to-transparent rounded-[4rem] blur-3xl"></div>
+              
+              <Image 
+                src={profileImg} 
+                alt="Joe Ton — AI Systems Performance Engineer"
+                class="relative z-10 w-[300px] md:w-[360px] h-auto rounded-3xl shadow-2xl ring-1 ring-white/10 object-cover"
+                width={360}
+                height={360}
+                loading="eager"
+              />
+              
+              <!-- Engineering badge -->
+              <div class="absolute -bottom-4 -right-4 bg-zinc-950 border border-white/20 rounded-2xl px-5 py-2.5 text-sm flex items-center gap-2 shadow-xl">
+                <span class="text-emerald-400">●</span>
+                <span class="font-mono text-xs tracking-[1px]">AMD • ROCm • vLLM</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
     </section>
 
+    <!-- ==================== FEATURED POSTS ==================== -->
     {
       featuredPosts.length > 0 && (
         <section
           id="featured"
           class:list={[
-            "pt-12 pb-6",
+            "pt-16 pb-8 max-w-6xl mx-auto px-6",
             { "border-b border-border": recentPosts.length > 0 },
           ]}
         >
-          <h2 class="text-2xl font-semibold tracking-wide">Featured</h2>
-          <ul>
+          <h2 class="text-2xl font-semibold tracking-wide mb-8">Featured</h2>
+          <ul class="space-y-4">
             {featuredPosts.map(data => (
               <Card variant="h3" {...data} />
             ))}
@@ -86,11 +116,17 @@ const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
       )
     }
 
+    <!-- ==================== RECENT POSTS ==================== -->
     {
       recentPosts.length > 0 && (
-        <section id="recent-posts" class="pt-12 pb-6">
-          <h2 class="text-2xl font-semibold tracking-wide">Recent Posts</h2>
-          <ul>
+        <section id="recent-posts" class="pt-16 pb-8 max-w-6xl mx-auto px-6">
+          <div class="flex items-end justify-between mb-8">
+            <h2 class="text-2xl font-semibold tracking-wide">Recent Papers &amp; Prototypes</h2>
+            <a href="/posts/" class="hidden md:inline-flex items-center gap-2 text-sm text-zinc-400 hover:text-white transition">
+              View all <IconArrowRight class="inline-block rtl:-rotate-180" />
+            </a>
+          </div>
+          <ul class="space-y-4">
             {recentPosts.map(
               (data, index) =>
                 index < SITE.postPerIndex && <Card variant="h3" {...data} />
@@ -100,7 +136,7 @@ const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
       )
     }
 
-    <div class="my-8 text-center">
+    <div class="my-12 text-center">
       <LinkButton href="/posts/">
         All Posts
         <IconArrowRight class="inline-block rtl:-rotate-180" />
