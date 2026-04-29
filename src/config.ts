@@ -3,7 +3,7 @@ export const SITE = {
   author: "Joe Ton",
   profile: "https://satnaing.dev/",
   desc: "Daily AI Systems Performance Engineering. Real AMD hardware prototypes, paper reviews, and production-grade optimization insights for training & inference.",
-  title: "joeton.ai",
+  title: "Joe Ton",
   ogImage: "astropaper-og.jpg",
   lightAndDarkMode: true,
   postPerIndex: 4,
