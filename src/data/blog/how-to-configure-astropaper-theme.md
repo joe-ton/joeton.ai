@@ -12,6 +12,10 @@ tags:
 description: How you can make AstroPaper theme absolutely yours.
 ---
 
+Testing writing this paper.  
+
+Alright, I'm just going to talk out loud and see whether or not I can paste this information on the astral web, and see whether or not it shows up. I'm going to talk briefly about AI-assisted performance engineering, particularly when it comes to the KV cache. So the KV cache has a new paper out that is dealing with attention matching. It has a lot of linear algebra. It has a, a new particular way of compaction, and it seems like a very promising paper. But the issue is it's not on the AMD hardware. And for that reason, I need to figure out an, an effective means to draw from the new paper and build a mental schema on how to process it in a effective way without spending months on end learning new mathematical equations. And new terminologies. So, this is where I'm at right now.
+
 AstroPaper is a highly customizable Astro blog theme. With AstroPaper, you can customize everything according to your personal taste. This article will explain how you can make some customizations easily in the config file.
 
 ## Table of contents
