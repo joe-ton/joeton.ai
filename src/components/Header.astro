@@ -2,26 +2,20 @@
 import IconX from "@/assets/icons/IconX.svg";
 import IconMoon from "@/assets/icons/IconMoon.svg";
 import IconSearch from "@/assets/icons/IconSearch.svg";
-import IconArchive from "@/assets/icons/IconArchive.svg";
 import IconSunHigh from "@/assets/icons/IconSunHigh.svg";
 import IconMenuDeep from "@/assets/icons/IconMenuDeep.svg";
 import LinkButton from "./LinkButton.astro";
 import { SITE } from "@/config";
-
 const { pathname } = Astro.url;
-
 // Remove trailing slash from current pathname if exists
 const currentPath =
   pathname.endsWith("/") && pathname !== "/" ? pathname.slice(0, -1) : pathname;
-
 const isActive = (path: string) => {
   const currentPathArray = currentPath.split("/").filter(p => p.trim());
   const pathArray = path.split("/").filter(p => p.trim());
-
   return currentPath === path || currentPathArray[0] === pathArray[0];
 };
 ---
-
 <a
   id="skip-to-content"
   href="#main-content"
@@ -29,7 +23,6 @@ const isActive = (path: string) => {
 >
   Skip to content
 </a>
-
 <header
   class="app-layout flex flex-col items-center justify-between sm:flex-row"
 >
@@ -77,35 +70,10 @@ const isActive = (path: string) => {
           </a>
         </li>
         <li class="col-span-2">
-          <a href="/tags" class:list={{ "active-nav": isActive("/tags") }}>
-            Tags
-          </a>
-        </li>
-        <li class="col-span-2">
           <a href="/about" class:list={{ "active-nav": isActive("/about") }}>
             About
           </a>
         </li>
-        {
-          SITE.showArchives && (
-            <li class="col-span-2">
-              <LinkButton
-                href="/archives"
-                class:list={[
-                  "focus-outline flex justify-center p-3 sm:p-1",
-                  {
-                    "active-nav [&>svg]:stroke-accent": isActive("/archives"),
-                  },
-                ]}
-                title="Archives"
-                aria-label="archives"
-              >
-                <IconArchive class="hidden sm:inline-block" />
-                <span class="sm:sr-only">Archives</span>
-              </LinkButton>
-            </li>
-          )
-        }
         <li class="col-span-1 flex items-center justify-center">
           <LinkButton
             href="/search"
@@ -140,30 +108,23 @@ const isActive = (path: string) => {
     </nav>
   </div>
 </header>
-
 <script>
   function toggleNav() {
     const menuBtn = document.querySelector("#menu-btn");
     const menuItems = document.querySelector("#menu-items");
     const menuIcon = document.querySelector("#menu-icon");
     const closeIcon = document.querySelector("#close-icon");
-
     if (!menuBtn || !menuItems || !menuIcon || !closeIcon) return;
-
     menuBtn.addEventListener("click", () => {
       const openMenu = menuBtn.getAttribute("aria-expanded") === "true";
-
       menuBtn.setAttribute("aria-expanded", openMenu ? "false" : "true");
       menuBtn.setAttribute("aria-label", openMenu ? "Open Menu" : "Close Menu");
-
       menuItems.classList.toggle("hidden");
       menuIcon.classList.toggle("hidden");
       closeIcon.classList.toggle("hidden");
     });
   }
-
   toggleNav();
-
   // Runs on view transitions navigation
   document.addEventListener("astro:after-swap", toggleNav);
 </script>
