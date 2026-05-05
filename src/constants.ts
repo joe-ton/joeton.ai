@@ -7,6 +7,7 @@ import IconWhatsapp from "@/assets/icons/IconWhatsapp.svg";
 import IconFacebook from "@/assets/icons/IconFacebook.svg";
 import IconTelegram from "@/assets/icons/IconTelegram.svg";
 import IconPinterest from "@/assets/icons/IconPinterest.svg";
+import IconCodeberg from "@/assets/icons/CodebergWhite.svg";
 import { SITE } from "@/config";
 
 interface Social {
@@ -22,6 +23,13 @@ export const SOCIALS: Social[] = [
     href: "https://github.com/joe-ton",
     linkTitle: `${SITE.title} on GitHub`,
     icon: IconGitHub,
+  },
+  {
+    name: "Codeberg",
+    href: "https://codeberg.org/joeton",
+    linkTitle: `${SITE.title} on Codeberg`,
+    icon: IconCodeberg,
+    active: true,
   },
   {
     name: "X",
